@@ -35,6 +35,12 @@ letsencrypt-crontab-{{ setname }}-{{ domainlist[0] }}:
     - identifier: letsencrypt-{{ setname }}-{{ domainlist[0] }}
     - require:
       - cmd: create-initial-cert-{{ setname }}-{{ domainlist[0] }}
+
+compile-cert-for-haproxy-{{ setname }}-{{ domainlist[0] }}:
+  cmd.run:
+    - only_if: ls /etc/letsencrypt/live/{{ domainlist[0] }}
+    - name: cat /etc/letsencrypt/live/{{ domainlist[0] }}/fullchain.pem /etc/letsencrypt/live/{{ domainlist[0] }}/privkey.pem > /srv/salt/env/base/_files/{{ domainlist[0] }}.crt
+
 {% endfor %}
 
 {%- endif %}
