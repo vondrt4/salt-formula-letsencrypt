@@ -4,7 +4,7 @@
 
 letsencrypt-packages:
   pkg.installed:
-  - names: {{ client.pkgs }}
+  - names: {{ client.source.pkgs }}
 
 letsencrypt-config:
   file.managed:
